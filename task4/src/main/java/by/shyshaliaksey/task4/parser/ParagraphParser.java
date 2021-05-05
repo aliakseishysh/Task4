@@ -19,21 +19,20 @@ public class ParagraphParser implements Chain {
 	}
 
 	@Override
-	public void parse(Component component) throws TextException {
+	public void parse(Component component, String content) throws TextException {
 		ComponentName name = component.getComponentName();
 		if (name == ComponentName.PARAGRAPH) {
-			String content = component.getContent();
 			Pattern pattern = Pattern.compile(SENTENCE);
 			Matcher matcher = pattern.matcher(content);
 			while (matcher.find()) {
 				String sentence = content.substring(matcher.start(), matcher.end());
 				// paragraphs.add(paragraph);
-				TextComposite sentenceComposite = new TextComposite(ComponentName.SENTENCE, sentence);
+				TextComposite sentenceComposite = new TextComposite(ComponentName.SENTENCE);
 				component.add(sentenceComposite);
-				nextChain.parse(sentenceComposite);
+				nextChain.parse(sentenceComposite, sentence);
 			}
 		} else {
-			nextChain.parse(component);
+			nextChain.parse(component, content);
 		}
 	}
 	

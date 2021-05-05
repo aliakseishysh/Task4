@@ -13,9 +13,14 @@ public class TextComposite extends Component {
 		super();
 	}
 	
-	public TextComposite(ComponentName componentName, String content) {
-		super(componentName, content);
+	public TextComposite(ComponentName componentName) {
+		super(componentName);
 		components = new ArrayList<>();
+	}
+	
+	@Override
+	public String getContent() throws TextException {
+		throw new TextException("Unsupported Operation");
 	}
 	
 	@Override

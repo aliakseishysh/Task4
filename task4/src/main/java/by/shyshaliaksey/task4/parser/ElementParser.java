@@ -10,29 +10,30 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class ElementParser implements Chain {
 
-	private static final String ELEMENT = "([\\t\\w()<>|&^.\\,'~-]+)( +|\\n|$)";
+	private static final String ELEMENT = "([\\t\\w()<>|&^.\\,'~-]+)( +|\\n|\\Z)";
 	private Chain nextChain;
 	
 	@Override
 	public void setNextChain(Chain nextChain) {
 		this.nextChain = nextChain;
 	}
-	
+	// нужно выстроить нормальную цепочку ответственности начиная с парсинга element
+	// тут уже можно по-нормальному применить этот паттерн
+	// SpaceCharParser->SymbolParser->ExpressionParser->WordParser... ????
 	@Override
-	public void parse(Component component) throws TextException {
+	public void parse(Component component, String content) throws TextException {
 		if (component.getComponentName() == ComponentName.ELEMENT) {
-			String content = component.getContent();
 			Pattern pattern = Pattern.compile(ELEMENT);
 			Matcher matcher = pattern.matcher(content);
 			while (matcher.find()) {
 				String element = content.substring(matcher.start(), matcher.end());
 				// paragraphs.add(paragraph);
-				TextComposite elementComposite = new TextComposite(ComponentName.ELEMENT, element);
+				TextComposite elementComposite = new TextComposite(ComponentName.ELEMENT);
 				component.add(elementComposite);
-				nextChain.parse(elementComposite);
+				//nextChain.parse(elementComposite, element);
 			}
 		} else {
-			nextChain.parse(component);
+			//nextChain.parse(component, content);
 		}
 	}
 	

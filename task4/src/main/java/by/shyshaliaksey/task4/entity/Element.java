@@ -4,8 +4,16 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class Element extends Component {
 
+	private String content;
+	
 	public Element(ComponentName componentName, String content) {
-		super(componentName, content);
+		super(componentName);
+		this.content = content;
+	}
+	
+	@Override
+	public String getContent() throws TextException {
+		return content;
 	}
 
 	@Override
@@ -46,5 +54,7 @@ public class Element extends Component {
 	public Object getChild(int index) throws TextException {
 		throw new TextException("Unsupported Operation");
 	}
+
+	
 
 }

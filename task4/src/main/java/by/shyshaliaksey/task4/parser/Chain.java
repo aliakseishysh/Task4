@@ -7,6 +7,6 @@ public interface Chain {
 
 	void setNextChain(Chain nextChain);
 
-	void parse(Component component) throws TextException;
+	void parse(Component parentComponent, String contentToParse) throws TextException;
 
 }
