@@ -8,21 +8,21 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class ExpressionParser implements Chain {
+public class WordWithCharactersOutsideParser implements Chain {
 
-	private static final String EXPRESSION = "^([~0-9|&()<>^]+)$";
+	private static final String WORD_WITH_CHARACTERS_OUTSIDE = "^([-(),:'\\\"]+)([A-Za-z]+)([-(),:'\\\".?!]+)$";
 	private Chain nextChain;
 	
 	@Override
 	public void setNextChain(Chain nextChain) {
 		this.nextChain = nextChain;
 	}
-
+	
 	// TODO IMPLEMENT
 	@Override
 	public void parse(Component parentComponent, String contentToParse) throws TextException {
 		if (parentComponent.getComponentName() == ComponentName.SENTENCE) {
-			Pattern pattern = Pattern.compile(EXPRESSION);
+			Pattern pattern = Pattern.compile(WORD_WITH_CHARACTERS_OUTSIDE);
 			Matcher matcher = pattern.matcher(contentToParse);
 			while (matcher.find()) {
 				String element = contentToParse.substring(matcher.start(), matcher.end());
@@ -34,5 +34,5 @@ public class ExpressionParser implements Chain {
 			nextChain.parse(parentComponent, contentToParse);
 		}
 	}
-	
+
 }

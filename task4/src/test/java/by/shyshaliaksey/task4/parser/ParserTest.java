@@ -19,16 +19,21 @@ public class ParserTest {
 
 	@Test
 	public void parseTest() throws URISyntaxException, TextException {
-		Component rootComponent = new TextComposite(ComponentName.TEXT);
-		
 		TextParser textParser = new TextParser();
 		ParagraphParser paragraphParser = new ParagraphParser();
 		SentenceParser sentenceParser = new SentenceParser();
 		ElementParser elementParser = new ElementParser();
+		WordParser wordParser = new WordParser();
+		WordWithCharactersOutsideParser wordWitchCharactersOutsideParser = new WordWithCharactersOutsideParser();
+		ExpressionParser expressionParser = new ExpressionParser();
+		
 		
 		textParser.setNextChain(paragraphParser);
 		paragraphParser.setNextChain(sentenceParser);
 		sentenceParser.setNextChain(elementParser);
+		elementParser.setNextChain(wordParser);
+		wordParser.setNextChain(wordWitchCharactersOutsideParser);
+		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();
@@ -36,6 +41,7 @@ public class ParserTest {
 		List<String> content = reader.readAllLines(absolutePath);
 		String stringContent = content.stream().map(Object::toString).collect(Collectors.joining(""));
 		
+		Component rootComponent = new TextComposite(ComponentName.TEXT);
 		textParser.parse(rootComponent, stringContent);
 		System.out.println(rootComponent);
 	}
