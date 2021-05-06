@@ -2,12 +2,17 @@ package by.shyshaliaksey.task4.interpreter;
 
 public class NonterminalExpression implements Expression {
 
-	private Expression expression;
+	private int number;
 	
-	@Override
-	public void interpret() {
-		// TODO Auto-generated method stub
-
+	public NonterminalExpression(int number) {
+		this.number = number;
 	}
+
+	@Override
+	public void interpret(Context context) {
+		context.pushValue(number);
+	}
+	
+
 
 }

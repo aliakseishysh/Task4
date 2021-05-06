@@ -21,7 +21,7 @@ public class ExpressionParser implements Chain {
 		this.nextChain = nextChain;
 	}
 
-	// TODO IMPLEMENT expression calculation
+	// TODO convert expression to postfix notation -> use interpreter pattern to work with postfix expression
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
 		if (parentComponent.getComponentName() == ComponentName.ELEMENT) {

@@ -1,7 +1,8 @@
 package by.shyshaliaksey.task4.interpreter;
 
+@FunctionalInterface
 public interface Expression {
 
-	void interpret();
+	public void interpret(Context context);
 	
 }
