@@ -2,14 +2,14 @@ package by.shyshaliaksey.task4.entity;
 
 import by.shyshaliaksey.task4.exception.TextException;
 
-public abstract class Component {
+public abstract class AbstractComponent {
 
 	protected ComponentName componentName;
 	
-	protected Component() {
+	protected AbstractComponent() {
 	}
 	
-	protected Component(ComponentName componentName) {
+	protected AbstractComponent(ComponentName componentName) {
 		this.componentName = componentName;
 	}
 	
@@ -19,9 +19,9 @@ public abstract class Component {
 	
 	public abstract void operation() throws TextException;
 
-	public abstract void add(Component component) throws TextException;
+	public abstract void add(AbstractComponent abstractComponent) throws TextException;
 	
-	public abstract void remove(Component component) throws TextException;
+	public abstract void remove(AbstractComponent abstractComponent) throws TextException;
 
 	public abstract Object getChild(int index) throws TextException;
 	

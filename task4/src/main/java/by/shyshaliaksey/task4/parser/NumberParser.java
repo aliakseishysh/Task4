@@ -1,6 +1,5 @@
 package by.shyshaliaksey.task4.parser;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
@@ -9,24 +8,26 @@ import by.shyshaliaksey.task4.entity.Element;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class ExpressionParser implements Chain {
+public class NumberParser implements Chain {
 
-	private static final String EXPRESSION = "^([~0-9|&()<>^]+)$";
-	private static final String TEST_PLACEHOLDER = "0";
-	
+	private static final String NUMBER = "^[0-9]+$";
+	private static final String EMPTY_LINE = "";
 	private Chain nextChain;
-	
 	@Override
 	public void setNextChain(Chain nextChain) {
 		this.nextChain = nextChain;
 	}
 
-	// TODO IMPLEMENT expression calculation
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
 		if (parentComponent.getComponentName() == ComponentName.ELEMENT) {
-			if (Pattern.matches(EXPRESSION, contentToParse)) {
-				parentComponent.add(new Element(ComponentName.NUMBER, TEST_PLACEHOLDER));
+			if (Pattern.matches(NUMBER, contentToParse)) {
+				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER);
+				String[] stringArray = contentToParse.split(EMPTY_LINE);
+				for (String symbol: stringArray) {
+					numberComposite.add(new Element(ComponentName.DIGIT, symbol));
+				}
+				parentComponent.add(numberComposite);
 			} else {
 				nextChain.parse(parentComponent, contentToParse);
 			}

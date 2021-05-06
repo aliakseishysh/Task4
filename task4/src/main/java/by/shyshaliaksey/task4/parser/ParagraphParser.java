@@ -3,7 +3,7 @@ package by.shyshaliaksey.task4.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import by.shyshaliaksey.task4.entity.Component;
+import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
@@ -19,8 +19,8 @@ public class ParagraphParser implements Chain {
 	}
 
 	@Override
-	public void parse(Component component, String content) throws TextException {
-		ComponentName name = component.getComponentName();
+	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
+		ComponentName name = abstractComponent.getComponentName();
 		if (name == ComponentName.PARAGRAPH) {
 			Pattern pattern = Pattern.compile(SENTENCE);
 			Matcher matcher = pattern.matcher(content);
@@ -28,11 +28,11 @@ public class ParagraphParser implements Chain {
 				String sentence = content.substring(matcher.start(), matcher.end());
 				// paragraphs.add(paragraph);
 				TextComposite sentenceComposite = new TextComposite(ComponentName.SENTENCE);
-				component.add(sentenceComposite);
 				nextChain.parse(sentenceComposite, sentence);
+				abstractComponent.add(sentenceComposite);
 			}
 		} else {
-			nextChain.parse(component, content);
+			nextChain.parse(abstractComponent, content);
 		}
 	}
 	

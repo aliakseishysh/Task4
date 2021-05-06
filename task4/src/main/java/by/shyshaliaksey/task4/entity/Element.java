@@ -2,7 +2,7 @@ package by.shyshaliaksey.task4.entity;
 
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class Element extends Component {
+public class Element extends AbstractComponent {
 
 	private String content;
 	
@@ -41,12 +41,12 @@ public class Element extends Component {
 	}
 
 	@Override
-	public void add(Component component) throws TextException {
+	public void add(AbstractComponent abstractComponent) throws TextException {
 		throw new TextException("Unsupported Operation");
 	}
 
 	@Override
-	public void remove(Component component) throws TextException {
+	public void remove(AbstractComponent abstractComponent) throws TextException {
 		throw new TextException("Unsupported Operation");
 	}
 

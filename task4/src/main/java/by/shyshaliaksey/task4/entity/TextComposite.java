@@ -5,9 +5,9 @@ import java.util.List;
 
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class TextComposite extends Component {
+public class TextComposite extends AbstractComponent {
 
-	private List<Component> components;
+	private List<AbstractComponent> abstractComponents;
 	
 	public TextComposite() {
 		super();
@@ -15,7 +15,7 @@ public class TextComposite extends Component {
 	
 	public TextComposite(ComponentName componentName) {
 		super(componentName);
-		components = new ArrayList<>();
+		abstractComponents = new ArrayList<>();
 	}
 	
 	@Override
@@ -25,24 +25,47 @@ public class TextComposite extends Component {
 	
 	@Override
 	public void operation() throws TextException {
-		for (Component component : components) {
-			component.operation();
+		for (AbstractComponent abstractComponent : abstractComponents) {
+			abstractComponent.operation();
 		}
 	}
 	
 	@Override
-	public void add(Component component) {
-		components.add(component);
+	public void add(AbstractComponent abstractComponent) {
+		abstractComponents.add(abstractComponent);
 	}
 
 	@Override
-	public void remove(Component component) {
-		components.remove(component);
+	public void remove(AbstractComponent abstractComponent) {
+		abstractComponents.remove(abstractComponent);
 	}
 
 	@Override
 	public Object getChild(int index) {
-		return components.get(index);
+		return abstractComponents.get(index);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		try {
+			return traverse(this, builder).toString();
+		} catch (TextException e) {
+			// TODO add log
+			return builder.toString();
+		}
+	}
+	
+	private StringBuilder traverse(TextComposite composite, StringBuilder builder) throws TextException {
+		for (AbstractComponent element: composite.abstractComponents) {
+			Class elementClass = element.getClass();
+			if (elementClass == Element.class) {
+				builder.append(element.getContent());
+			} else if (elementClass == TextComposite.class) {
+				traverse((TextComposite)element, builder);
+			}
+		}
+		return builder;
 	}
 
 }

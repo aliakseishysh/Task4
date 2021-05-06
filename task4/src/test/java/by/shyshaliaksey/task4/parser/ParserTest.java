@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.testng.annotations.Test;
 
-import by.shyshaliaksey.task4.entity.Component;
+import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
@@ -23,27 +23,30 @@ public class ParserTest {
 		ParagraphParser paragraphParser = new ParagraphParser();
 		SentenceParser sentenceParser = new SentenceParser();
 		ElementParser elementParser = new ElementParser();
+		NumberParser numberParser = new NumberParser();
 		WordParser wordParser = new WordParser();
 		WordWithCharactersOutsideParser wordWitchCharactersOutsideParser = new WordWithCharactersOutsideParser();
 		ExpressionParser expressionParser = new ExpressionParser();
-		
+		FullElementParser fullElementParser = new FullElementParser();
 		
 		textParser.setNextChain(paragraphParser);
 		paragraphParser.setNextChain(sentenceParser);
 		sentenceParser.setNextChain(elementParser);
-		elementParser.setNextChain(wordParser);
+		elementParser.setNextChain(numberParser);
+		numberParser.setNextChain(wordParser);
 		wordParser.setNextChain(wordWitchCharactersOutsideParser);
 		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
+		expressionParser.setNextChain(fullElementParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();
 		TextReader reader = new TextReaderImpl();
 		List<String> content = reader.readAllLines(absolutePath);
-		String stringContent = content.stream().map(Object::toString).collect(Collectors.joining(""));
+		String stringContent = content.stream().map(Object::toString).collect(Collectors.joining("\n"));
 		
-		Component rootComponent = new TextComposite(ComponentName.TEXT);
+		AbstractComponent rootComponent = new TextComposite(ComponentName.TEXT);
 		textParser.parse(rootComponent, stringContent);
-		System.out.println(rootComponent);
+		System.out.println(rootComponent.toString());
 	}
 	
 }
