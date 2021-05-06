@@ -23,6 +23,6 @@ public abstract class AbstractComponent {
 	
 	public abstract void remove(AbstractComponent abstractComponent) throws TextException;
 
-	public abstract Object getChild(int index) throws TextException;
+	public abstract AbstractComponent getChild(int index) throws TextException;
 	
 }

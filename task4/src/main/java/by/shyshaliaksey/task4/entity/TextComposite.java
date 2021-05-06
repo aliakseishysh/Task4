@@ -41,7 +41,7 @@ public class TextComposite extends AbstractComponent {
 	}
 
 	@Override
-	public Object getChild(int index) {
+	public AbstractComponent getChild(int index) {
 		return abstractComponents.get(index);
 	}
 	

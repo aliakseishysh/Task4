@@ -51,7 +51,7 @@ public class Element extends AbstractComponent {
 	}
 
 	@Override
-	public Object getChild(int index) throws TextException {
+	public AbstractComponent getChild(int index) throws TextException {
 		throw new TextException("Unsupported Operation");
 	}
 
