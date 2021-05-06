@@ -30,6 +30,24 @@ public class BinaryInterpreter {
 			case 'L':
 				listExpression.add(new TerminalExpressionLeftShift());
 				break;
+			case 'R':
+				listExpression.add(new TerminalExpressionRightShift());
+				break;
+			case 'U':
+				listExpression.add(new TerminalExpressionUnsignedRightShift());
+				break;
+			case '~':
+				listExpression.add(new TerminalExpressionUnaryNot());
+				break;
+			case '|':
+				listExpression.add(new TerminalExpressionOr());
+				break;
+			case '&':
+				listExpression.add(new TerminalExpressionAnd());
+				break;
+			case '^':
+				listExpression.add(new TerminalExpressionXor());
+				break;
 			default:
 				Scanner scan = new Scanner(lexeme);
 				if (scan.hasNextInt()) {

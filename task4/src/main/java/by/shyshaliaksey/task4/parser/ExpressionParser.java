@@ -8,6 +8,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.Element;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
+import by.shyshaliaksey.task4.interpreter.BinaryInterpreter;
 
 public class ExpressionParser implements Chain {
 
@@ -26,7 +27,11 @@ public class ExpressionParser implements Chain {
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
 		if (parentComponent.getComponentName() == ComponentName.ELEMENT) {
 			if (Pattern.matches(EXPRESSION, contentToParse)) {
-				parentComponent.add(new Element(ComponentName.NUMBER, TEST_PLACEHOLDER));
+				NotationChanger notationChanger = new NotationChanger();
+				String postfixNotation = notationChanger.normalToPrefix(contentToParse);
+				BinaryInterpreter interpreter = new BinaryInterpreter(postfixNotation);
+				
+				parentComponent.add(new Element(ComponentName.NUMBER, interpreter.calculate().toString()));
 			} else {
 				nextChain.parse(parentComponent, contentToParse);
 			}
