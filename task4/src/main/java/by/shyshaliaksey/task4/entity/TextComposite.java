@@ -19,17 +19,10 @@ public class TextComposite extends AbstractComponent {
 	}
 	
 	@Override
-	public String getContent() throws TextException {
+	public char getContent() throws TextException {
 		throw new TextException("Unsupported Operation");
 	}
-	
-	@Override
-	public void operation() throws TextException {
-		for (AbstractComponent abstractComponent : abstractComponents) {
-			abstractComponent.operation();
-		}
-	}
-	
+
 	@Override
 	public void add(AbstractComponent abstractComponent) {
 		abstractComponents.add(abstractComponent);

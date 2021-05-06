@@ -23,8 +23,8 @@ public class NumberParser implements Chain {
 		if (parentComponent.getComponentName() == ComponentName.ELEMENT) {
 			if (Pattern.matches(NUMBER, contentToParse)) {
 				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER);
-				String[] stringArray = contentToParse.split(EMPTY_LINE);
-				for (String symbol: stringArray) {
+				char[] charArray = contentToParse.toCharArray();
+				for (char symbol: charArray) {
 					numberComposite.add(new Element(ComponentName.DIGIT, symbol));
 				}
 				parentComponent.add(numberComposite);

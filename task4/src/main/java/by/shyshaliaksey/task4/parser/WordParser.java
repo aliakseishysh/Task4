@@ -24,8 +24,8 @@ public class WordParser implements Chain {
 		if (parentComponent.getComponentName() == ComponentName.ELEMENT) {
 			if (Pattern.matches(WORD, contentToParse)) {
 				TextComposite wordComposite = new TextComposite(ComponentName.WORD);
-				String[] stringArray = contentToParse.split(EMPTY_LINE);
-				for (String symbol: stringArray) {
+				char[] charArray = contentToParse.toCharArray();
+				for (char symbol: charArray) {
 					wordComposite.add(new Element(ComponentName.SYMBOL, symbol));
 				}
 				parentComponent.add(wordComposite);

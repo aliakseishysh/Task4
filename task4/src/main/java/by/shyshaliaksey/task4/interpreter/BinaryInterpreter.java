@@ -51,7 +51,8 @@ public class BinaryInterpreter {
 			default:
 				Scanner scan = new Scanner(lexeme);
 				if (scan.hasNextInt()) {
-					listExpression.add(new NonterminalExpression(scan.nextInt()));
+					int value = scan.nextInt();
+					listExpression.add(new NonterminalExpression(value));
 				}
 			}
 		}

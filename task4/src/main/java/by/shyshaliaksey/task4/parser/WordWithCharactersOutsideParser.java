@@ -28,21 +28,21 @@ public class WordWithCharactersOutsideParser implements Chain {
 			if (matcher.find()) {
 				String symbolsBefore = matcher.group(1);
 				if (symbolsBefore != null) {
-					for (String symbol: symbolsBefore.split(EMPTY_LINE)) {
+					for (char symbol: symbolsBefore.toCharArray()) {
 						parentComponent.add(new Element(ComponentName.SYMBOL, symbol));
 					}
 				}
 				
 				String word = matcher.group(2);
 				TextComposite wordComposite = new TextComposite(ComponentName.WORD);
-				for (String symbol: word.split(EMPTY_LINE)) {
+				for (char symbol: word.toCharArray()) {
 					wordComposite.add(new Element(ComponentName.SYMBOL, symbol));
 				}
 				parentComponent.add(wordComposite);
 				
 				String symbolsAfter = matcher.group(3);
 				if (symbolsAfter != null) {
-					for (String symbol: symbolsAfter.split(EMPTY_LINE)) {
+					for (char symbol: symbolsAfter.toCharArray()) {
 						parentComponent.add(new Element(ComponentName.SYMBOL, symbol));
 					}
 				}

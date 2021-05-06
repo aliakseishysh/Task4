@@ -30,8 +30,14 @@ public class ExpressionParser implements Chain {
 				NotationChanger notationChanger = new NotationChanger();
 				String postfixNotation = notationChanger.normalToPrefix(contentToParse);
 				BinaryInterpreter interpreter = new BinaryInterpreter(postfixNotation);
-				
-				parentComponent.add(new Element(ComponentName.NUMBER, interpreter.calculate().toString()));
+				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER);
+				Number result = interpreter.calculate();
+				String resultString = result.toString();
+				char[] resultChars = resultString.toCharArray();
+				for (char symbol: resultChars) {
+					numberComposite.add(new Element(ComponentName.DIGIT, symbol));
+				}
+				parentComponent.add(numberComposite);
 			} else {
 				nextChain.parse(parentComponent, contentToParse);
 			}

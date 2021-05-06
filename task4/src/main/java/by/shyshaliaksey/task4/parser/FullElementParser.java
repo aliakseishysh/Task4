@@ -20,7 +20,7 @@ public class FullElementParser implements Chain {
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
 		if (abstractComponent.getComponentName() == ComponentName.ELEMENT) {
 			TextComposite element = new TextComposite(ComponentName.ELEMENT);
-			for (String symbol: content.split(EMPTY_LINE)) {
+			for (char symbol: content.toCharArray()) {
 				element.add(new Element(ComponentName.SYMBOL, symbol));
 			}
 			abstractComponent.add(element);

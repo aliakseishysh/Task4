@@ -25,4 +25,15 @@ public class NotationChangerTest {
 		
 	}
 	
+	
+	@Test
+	public void unaryNotTest() {
+		NotationChanger notationChanger = new NotationChanger();
+		String normalNotation = "~5&~8";
+		String postfixNotation = notationChanger.normalToPrefix(normalNotation);
+		System.out.println(postfixNotation);
+		BinaryInterpreter interpreter = new BinaryInterpreter(postfixNotation);
+		System.out.println(interpreter.calculate());
+		
+	}
 }

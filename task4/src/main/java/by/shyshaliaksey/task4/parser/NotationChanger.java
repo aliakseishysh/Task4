@@ -25,12 +25,14 @@ public class NotationChanger {
 	// TODO implement
 	public String normalToPrefix(String normalForm) {
 		boolean operationPrevious = false;
+		boolean previousDigit = false;
 		String[] arrayToChange = setup(normalForm).split("");
 		String outputString = "";
 		for (String symbol: arrayToChange) {
 			switch(symbol) {
 			case UNARY_NOT:
-				outputString += " " + symbol;
+				operationPrevious = true;
+				stack.push(symbol);
 				continue;
 			case OPEN_BRACKET:
 				stack.push(symbol);
@@ -43,6 +45,7 @@ public class NotationChanger {
 				continue;
 			}
 			if (isSymbolDigit(symbol)) {
+				previousDigit = true;
 				if (operationPrevious) {
 					outputString += " ";
 					operationPrevious = false;
@@ -51,13 +54,25 @@ public class NotationChanger {
 				continue;
 			}
 			if (getPriority(symbol) != -1) {
+				if (previousDigit) {
+					if (!stack.empty()) {
+						if (stack.peek().equals(UNARY_NOT)) {
+							outputString += " " + stack.pop();
+						}
+					}
+				}
+				previousDigit = false;
 				operationPrevious = true;
 				if (stack.empty()) {
 					stack.push(symbol);
 					continue;
 				}
+				
 				while (getPriority(stack.peek()) > getPriority(symbol)) {
 					outputString += " " + stack.pop();
+					if (stack.empty()) {
+						break;
+					}
 				}
 				stack.push(symbol);
 			}

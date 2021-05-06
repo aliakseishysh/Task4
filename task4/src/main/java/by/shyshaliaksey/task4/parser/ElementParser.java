@@ -11,8 +11,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class ElementParser implements Chain {
 
-	private static final String ELEMENT_WITH_WHITESPACES = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.])*";
-	private static final String EMPTY_LINE = "";
+	private static final String ELEMENT_WITH_WHITESPACES = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.]*)$";
 	private Chain nextChain;
 	
 	@Override
@@ -28,7 +27,7 @@ public class ElementParser implements Chain {
 			while (matcher.find()) {
 				String spaceSymbolsBeforeElement = matcher.group(1);
 				if (spaceSymbolsBeforeElement != null) {
-					for (String spaceSymbol: spaceSymbolsBeforeElement.split(EMPTY_LINE)) {
+					for (char spaceSymbol: spaceSymbolsBeforeElement.toCharArray()) {
 						abstractComponent.add(new Element(ComponentName.SYMBOL, spaceSymbol));
 					}
 				}
@@ -38,7 +37,7 @@ public class ElementParser implements Chain {
 				
 				String spaceSymbolsAfterElement = matcher.group(3);
 				if (spaceSymbolsAfterElement != null) {
-					for (String spaceSymbol: spaceSymbolsAfterElement.split(EMPTY_LINE)) {
+					for (char spaceSymbol: spaceSymbolsAfterElement.toCharArray()) {
 						abstractComponent.add(new Element(ComponentName.SYMBOL, spaceSymbol));
 					}
 				}

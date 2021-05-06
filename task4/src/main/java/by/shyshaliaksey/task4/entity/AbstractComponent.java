@@ -15,10 +15,8 @@ public abstract class AbstractComponent {
 	
 	public ComponentName getComponentName() { return this.componentName; }
 	
-	public abstract String getContent() throws TextException;
+	public abstract char getContent() throws TextException;
 	
-	public abstract void operation() throws TextException;
-
 	public abstract void add(AbstractComponent abstractComponent) throws TextException;
 	
 	public abstract void remove(AbstractComponent abstractComponent) throws TextException;
