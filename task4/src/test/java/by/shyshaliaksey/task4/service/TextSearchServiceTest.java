@@ -1,24 +1,39 @@
-package by.shyshaliaksey.task4.parser;
+package by.shyshaliaksey.task4.service;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
+import by.shyshaliaksey.task4.parser.ElementParser;
+import by.shyshaliaksey.task4.parser.ExpressionParser;
+import by.shyshaliaksey.task4.parser.FullElementParser;
+import by.shyshaliaksey.task4.parser.NumberParser;
+import by.shyshaliaksey.task4.parser.ParagraphParser;
+import by.shyshaliaksey.task4.parser.SentenceParser;
+import by.shyshaliaksey.task4.parser.TextParser;
+import by.shyshaliaksey.task4.parser.WordParser;
+import by.shyshaliaksey.task4.parser.WordWithCharactersOutsideParser;
 import by.shyshaliaksey.task4.reader.TextReader;
 import by.shyshaliaksey.task4.reader.impl.TextReaderImpl;
 
-public class ParserTest {
+public class TextSearchServiceTest {
 
-	@Test
-	public void parseTest() throws URISyntaxException, TextException {
+	private AbstractComponent rootComponent;
+	
+	@BeforeClass
+	public void parseData() throws URISyntaxException, TextException {
 		TextParser textParser = new TextParser();
 		ParagraphParser paragraphParser = new ParagraphParser();
 		SentenceParser sentenceParser = new SentenceParser();
@@ -44,9 +59,21 @@ public class ParserTest {
 		List<String> content = reader.readAllLines(absolutePath);
 		String stringContent = content.stream().map(Object::toString).collect(Collectors.joining("\n"));
 		
-		AbstractComponent rootComponent = new TextComposite(ComponentName.TEXT, null);
+		rootComponent = new TextComposite(ComponentName.TEXT, null);
 		textParser.parse(rootComponent, stringContent);
-		System.out.println(rootComponent.toString());
 	}
+
+	@Test
+	public void findSentencesWithLongestWord() throws TextException {
+		TextSearchService searchService = new TextSearchService();
+		List<Integer> actual = searchService.findSentencesWithLongestWord((TextComposite) rootComponent);
+		List<Integer> expected = new ArrayList<>(Arrays.asList(new Integer[] {2}));
+		Assert.assertEquals(actual, expected);
+	}
+	
+	
+	
+	
+	
 	
 }

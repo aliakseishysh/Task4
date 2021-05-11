@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.Element;
+import by.shyshaliaksey.task4.entity.Symbol;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
@@ -28,7 +28,7 @@ public class ElementParser implements Chain {
 				String spaceSymbolsBeforeElement = matcher.group(1);
 				if (spaceSymbolsBeforeElement != null) {
 					for (char spaceSymbol: spaceSymbolsBeforeElement.toCharArray()) {
-						abstractComponent.add(new Element(ComponentName.SYMBOL, spaceSymbol));
+						abstractComponent.add(new Symbol(ComponentName.SYMBOL, abstractComponent, spaceSymbol));
 					}
 				}
 
@@ -38,7 +38,7 @@ public class ElementParser implements Chain {
 				String spaceSymbolsAfterElement = matcher.group(3);
 				if (spaceSymbolsAfterElement != null) {
 					for (char spaceSymbol: spaceSymbolsAfterElement.toCharArray()) {
-						abstractComponent.add(new Element(ComponentName.SYMBOL, spaceSymbol));
+						abstractComponent.add(new Symbol(ComponentName.SYMBOL, abstractComponent, spaceSymbol));
 					}
 				}
 			}

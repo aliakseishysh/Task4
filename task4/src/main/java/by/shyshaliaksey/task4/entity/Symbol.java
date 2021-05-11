@@ -2,12 +2,12 @@ package by.shyshaliaksey.task4.entity;
 
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class Element extends AbstractComponent {
+public class Symbol extends AbstractComponent {
 
 	private char content;
 	
-	public Element(ComponentName componentName, char content) {
-		super(componentName);
+	public Symbol(ComponentName componentName, AbstractComponent parent, char content) {
+		super(componentName, parent);
 		this.content = content;
 	}
 	

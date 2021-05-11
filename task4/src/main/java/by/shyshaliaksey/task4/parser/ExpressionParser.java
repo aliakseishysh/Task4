@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.Element;
+import by.shyshaliaksey.task4.entity.Symbol;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.interpreter.BinaryInterpreter;
@@ -30,12 +30,12 @@ public class ExpressionParser implements Chain {
 				NotationChanger notationChanger = new NotationChanger();
 				String postfixNotation = notationChanger.normalToPrefix(contentToParse);
 				BinaryInterpreter interpreter = new BinaryInterpreter(postfixNotation);
-				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER);
+				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER, parentComponent);
 				Number result = interpreter.calculate();
 				String resultString = result.toString();
 				char[] resultChars = resultString.toCharArray();
 				for (char symbol: resultChars) {
-					numberComposite.add(new Element(ComponentName.DIGIT, symbol));
+					numberComposite.add(new Symbol(ComponentName.DIGIT, parentComponent, symbol));
 				}
 				parentComponent.add(numberComposite);
 			} else {

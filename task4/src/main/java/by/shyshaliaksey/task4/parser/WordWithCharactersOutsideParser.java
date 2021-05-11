@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.Element;
+import by.shyshaliaksey.task4.entity.Symbol;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
@@ -29,21 +29,21 @@ public class WordWithCharactersOutsideParser implements Chain {
 				String symbolsBefore = matcher.group(1);
 				if (symbolsBefore != null) {
 					for (char symbol: symbolsBefore.toCharArray()) {
-						parentComponent.add(new Element(ComponentName.SYMBOL, symbol));
+						parentComponent.add(new Symbol(ComponentName.SYMBOL, parentComponent, symbol));
 					}
 				}
 				
 				String word = matcher.group(2);
-				TextComposite wordComposite = new TextComposite(ComponentName.WORD);
+				TextComposite wordComposite = new TextComposite(ComponentName.WORD, parentComponent);
 				for (char symbol: word.toCharArray()) {
-					wordComposite.add(new Element(ComponentName.SYMBOL, symbol));
+					wordComposite.add(new Symbol(ComponentName.SYMBOL, parentComponent, symbol));
 				}
 				parentComponent.add(wordComposite);
 				
 				String symbolsAfter = matcher.group(3);
 				if (symbolsAfter != null) {
 					for (char symbol: symbolsAfter.toCharArray()) {
-						parentComponent.add(new Element(ComponentName.SYMBOL, symbol));
+						parentComponent.add(new Symbol(ComponentName.SYMBOL, parentComponent, symbol));
 					}
 				}
 				

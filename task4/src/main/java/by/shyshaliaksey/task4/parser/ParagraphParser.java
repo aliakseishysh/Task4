@@ -27,7 +27,7 @@ public class ParagraphParser implements Chain {
 			while (matcher.find()) {
 				String sentence = content.substring(matcher.start(), matcher.end());
 				// paragraphs.add(paragraph);
-				TextComposite sentenceComposite = new TextComposite(ComponentName.SENTENCE);
+				TextComposite sentenceComposite = new TextComposite(ComponentName.SENTENCE, abstractComponent);
 				nextChain.parse(sentenceComposite, sentence);
 				abstractComponent.add(sentenceComposite);
 			}

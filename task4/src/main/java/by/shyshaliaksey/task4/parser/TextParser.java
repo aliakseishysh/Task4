@@ -26,7 +26,7 @@ public class TextParser implements Chain {
 			Matcher matcher = pattern.matcher(content);
             while (matcher.find()) {
 				String paragraph = content.substring(matcher.start(), matcher.end());
-				TextComposite paragraphComposite = new TextComposite(ComponentName.PARAGRAPH);
+				TextComposite paragraphComposite = new TextComposite(ComponentName.PARAGRAPH, abstractComponent);
 				nextChain.parse(paragraphComposite, paragraph);
 				abstractComponent.add(paragraphComposite);
 			}

@@ -7,15 +7,23 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class TextComposite extends AbstractComponent {
 
-	private List<AbstractComponent> abstractComponents;
+	private List<AbstractComponent> components;
 	
 	public TextComposite() {
 		super();
 	}
 	
-	public TextComposite(ComponentName componentName) {
-		super(componentName);
-		abstractComponents = new ArrayList<>();
+	public TextComposite(ComponentName componentName, AbstractComponent parent) {
+		super(componentName, parent);
+		this.components = new ArrayList<>();
+	}
+	
+	public List<AbstractComponent> getComponents() {
+		return components;
+	}
+	
+	public void setChild(int index, AbstractComponent component) {
+		components.set(index, component);
 	}
 	
 	@Override
@@ -24,18 +32,23 @@ public class TextComposite extends AbstractComponent {
 	}
 
 	@Override
-	public void add(AbstractComponent abstractComponent) {
-		abstractComponents.add(abstractComponent);
+	public void add(AbstractComponent component) {
+		components.add(component);
 	}
 
 	@Override
-	public void remove(AbstractComponent abstractComponent) {
-		abstractComponents.remove(abstractComponent);
+	public void remove(AbstractComponent component) {
+		components.remove(component);
 	}
 
 	@Override
 	public AbstractComponent getChild(int index) {
-		return abstractComponents.get(index);
+		return components.get(index);
+	}
+	
+	@Override
+	public TextComposite clone() throws CloneNotSupportedException {
+		return (TextComposite) super.clone();
 	}
 	
 	@Override
@@ -50,12 +63,12 @@ public class TextComposite extends AbstractComponent {
 	}
 	
 	private StringBuilder traverse(TextComposite composite, StringBuilder builder) throws TextException {
-		for (AbstractComponent element: composite.abstractComponents) {
-			Class elementClass = element.getClass();
-			if (elementClass == Element.class) {
-				builder.append(element.getContent());
-			} else if (elementClass == TextComposite.class) {
-				traverse((TextComposite)element, builder);
+		for (AbstractComponent component: composite.components) {
+			ComponentName componentName = component.getComponentName();
+			if (componentName == ComponentName.SYMBOL || componentName == ComponentName.DIGIT) {
+				builder.append(component.getContent());
+			} else {
+				traverse((TextComposite)component, builder);
 			}
 		}
 		return builder;
