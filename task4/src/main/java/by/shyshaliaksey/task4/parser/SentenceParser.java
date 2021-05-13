@@ -8,15 +8,9 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class SentenceParser implements Chain {
+public class SentenceParser extends Chain {
 
 	private static final String ELEMENT = "\\t* *([\\w()<>|&^.\\\\,'~-]+)( |\\n|[.!?])+";
-	private Chain nextChain;
-	
-	@Override
-	public void setNextChain(Chain nextChain) {
-		this.nextChain = nextChain;
-	}
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
@@ -25,13 +19,12 @@ public class SentenceParser implements Chain {
 			Matcher matcher = pattern.matcher(content);
 			while (matcher.find()) {
 				String element = content.substring(matcher.start(), matcher.end());
-				// paragraphs.add(paragraph);
 				TextComposite elementComposite = new TextComposite(ComponentName.ELEMENT, abstractComponent);
-				nextChain.parse(elementComposite, element);
+				this.nextInChain.parse(elementComposite, element);
 				abstractComponent.add(elementComposite);
 			}
 		} else {
-			nextChain.parse(abstractComponent, content);
+			this.nextInChain.parse(abstractComponent, content);
 		}
 	}
 

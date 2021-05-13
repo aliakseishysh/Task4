@@ -29,14 +29,14 @@ public class ParserTest {
 		ExpressionParser expressionParser = new ExpressionParser();
 		FullElementParser fullElementParser = new FullElementParser();
 		
-		textParser.setNextChain(paragraphParser);
-		paragraphParser.setNextChain(sentenceParser);
-		sentenceParser.setNextChain(elementParser);
-		elementParser.setNextChain(numberParser);
-		numberParser.setNextChain(wordParser);
-		wordParser.setNextChain(wordWitchCharactersOutsideParser);
-		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
-		expressionParser.setNextChain(fullElementParser);
+		textParser.setNextInChain(paragraphParser);
+		paragraphParser.setNextInChain(sentenceParser);
+		sentenceParser.setNextInChain(elementParser);
+		elementParser.setNextInChain(numberParser);
+		numberParser.setNextInChain(wordParser);
+		wordParser.setNextInChain(wordWitchCharactersOutsideParser);
+		wordWitchCharactersOutsideParser.setNextInChain(expressionParser);
+		expressionParser.setNextInChain(fullElementParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();

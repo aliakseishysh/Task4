@@ -27,6 +27,7 @@ import by.shyshaliaksey.task4.parser.WordParser;
 import by.shyshaliaksey.task4.parser.WordWithCharactersOutsideParser;
 import by.shyshaliaksey.task4.reader.TextReader;
 import by.shyshaliaksey.task4.reader.impl.TextReaderImpl;
+import by.shyshaliaksey.task4.service.impl.TextSearchServiceImpl;
 
 public class TextSearchServiceTest {
 
@@ -44,14 +45,14 @@ public class TextSearchServiceTest {
 		ExpressionParser expressionParser = new ExpressionParser();
 		FullElementParser fullElementParser = new FullElementParser();
 		
-		textParser.setNextChain(paragraphParser);
-		paragraphParser.setNextChain(sentenceParser);
-		sentenceParser.setNextChain(elementParser);
-		elementParser.setNextChain(numberParser);
-		numberParser.setNextChain(wordParser);
-		wordParser.setNextChain(wordWitchCharactersOutsideParser);
-		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
-		expressionParser.setNextChain(fullElementParser);
+		textParser.setNextInChain(paragraphParser);
+		paragraphParser.setNextInChain(sentenceParser);
+		sentenceParser.setNextInChain(elementParser);
+		elementParser.setNextInChain(numberParser);
+		numberParser.setNextInChain(wordParser);
+		wordParser.setNextInChain(wordWitchCharactersOutsideParser);
+		wordWitchCharactersOutsideParser.setNextInChain(expressionParser);
+		expressionParser.setNextInChain(fullElementParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();
@@ -65,7 +66,7 @@ public class TextSearchServiceTest {
 
 	@Test
 	public void findSentencesWithLongestWord() throws TextException {
-		TextSearchService searchService = new TextSearchService();
+		TextSearchService searchService = new TextSearchServiceImpl();
 		List<Integer> actual = searchService.findSentencesWithLongestWord((TextComposite) rootComponent);
 		List<Integer> expected = new ArrayList<>(Arrays.asList(new Integer[] {2}));
 		Assert.assertEquals(actual, expected);

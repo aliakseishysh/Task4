@@ -2,30 +2,19 @@ package by.shyshaliaksey.task4.parser;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.Symbol;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class FullElementParser implements Chain {
-
-	private static final String EMPTY_LINE = "";
-	private Chain nextChain;
-	
-	@Override
-	public void setNextChain(Chain nextChain) {
-		this.nextChain = nextChain;
-	}
+public class FullElementParser extends Chain {
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
 		if (abstractComponent.getComponentName() == ComponentName.ELEMENT) {
-			TextComposite element = new TextComposite(ComponentName.ELEMENT, abstractComponent);
-			for (char symbol: content.toCharArray()) {
-				element.add(new Symbol(ComponentName.SYMBOL, abstractComponent, symbol));
-			}
-			abstractComponent.add(element);
+			TextComposite unknownElement = new TextComposite(ComponentName.UNKNOWN_ELEMENT, abstractComponent);
+			this.parseSymbols(unknownElement, content);
+			abstractComponent.add(unknownElement);
 		} else {
-			throw new TextException("Can't parse this element");
+			throw new TextException("Can not parse this element: " + content);
 		}
 	}
 	

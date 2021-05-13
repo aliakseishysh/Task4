@@ -3,8 +3,6 @@ package by.shyshaliaksey.task4.service;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +25,8 @@ import by.shyshaliaksey.task4.parser.WordParser;
 import by.shyshaliaksey.task4.parser.WordWithCharactersOutsideParser;
 import by.shyshaliaksey.task4.reader.TextReader;
 import by.shyshaliaksey.task4.reader.impl.TextReaderImpl;
+import by.shyshaliaksey.task4.service.impl.TextChangeServiceImpl;
+import by.shyshaliaksey.task4.service.impl.TextSearchServiceImpl;
 
 public class TextChangeServiceTest {
 
@@ -44,14 +44,14 @@ public class TextChangeServiceTest {
 		ExpressionParser expressionParser = new ExpressionParser();
 		FullElementParser fullElementParser = new FullElementParser();
 		
-		textParser.setNextChain(paragraphParser);
-		paragraphParser.setNextChain(sentenceParser);
-		sentenceParser.setNextChain(elementParser);
-		elementParser.setNextChain(numberParser);
-		numberParser.setNextChain(wordParser);
-		wordParser.setNextChain(wordWitchCharactersOutsideParser);
-		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
-		expressionParser.setNextChain(fullElementParser);
+		textParser.setNextInChain(paragraphParser);
+		paragraphParser.setNextInChain(sentenceParser);
+		sentenceParser.setNextInChain(elementParser);
+		elementParser.setNextInChain(numberParser);
+		numberParser.setNextInChain(wordParser);
+		wordParser.setNextInChain(wordWitchCharactersOutsideParser);
+		wordWitchCharactersOutsideParser.setNextInChain(expressionParser);
+		expressionParser.setNextInChain(fullElementParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();
@@ -65,9 +65,9 @@ public class TextChangeServiceTest {
 
 	@Test
 	public void deleteSentences() throws TextException {
-		TextChangeService changeService = new TextChangeService();
+		TextChangeService changeService = new TextChangeServiceImpl();
 		changeService.deleteAllSentencesWithWordCountLessThen((TextComposite)rootComponent, 5);
-		TextSearchService searchService = new TextSearchService();
+		TextSearchService searchService = new TextSearchServiceImpl();
 		List<AbstractComponent> sentences = searchService.findAllSentences((TextComposite) rootComponent);
 		int actual = sentences.size();
 		int expected = 5;

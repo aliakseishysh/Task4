@@ -1,4 +1,6 @@
-package by.shyshaliaksey.task4.interpreter;
+package by.shyshaliaksey.task4.interpreter.impl;
+
+import by.shyshaliaksey.task4.interpreter.Expression;
 
 public class NonterminalExpression implements Expression {
 

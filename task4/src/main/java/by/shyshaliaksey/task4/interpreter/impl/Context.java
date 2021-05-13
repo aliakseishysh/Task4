@@ -1,4 +1,4 @@
-package by.shyshaliaksey.task4.interpreter;
+package by.shyshaliaksey.task4.interpreter.impl;
 
 import java.util.ArrayDeque;
 

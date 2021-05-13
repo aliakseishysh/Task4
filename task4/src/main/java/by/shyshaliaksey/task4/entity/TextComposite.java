@@ -3,10 +3,13 @@ package by.shyshaliaksey.task4.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.shyshaliaksey.task4.exception.TextException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TextComposite extends AbstractComponent {
 
+	private static Logger logger = LogManager.getRootLogger(); 
 	private List<AbstractComponent> components;
 	
 	public TextComposite() {
@@ -18,17 +21,14 @@ public class TextComposite extends AbstractComponent {
 		this.components = new ArrayList<>();
 	}
 	
-	public List<AbstractComponent> getComponents() {
-		return components;
-	}
-	
-	public void setChild(int index, AbstractComponent component) {
-		components.set(index, component);
+	public int getComponentsSize() {
+		return components.size();
 	}
 	
 	@Override
-	public char getContent() throws TextException {
-		throw new TextException("Unsupported Operation");
+	public char getContent() {
+		logger.log(Level.ERROR, "UnsupportedOperationException");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -54,24 +54,26 @@ public class TextComposite extends AbstractComponent {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		try {
-			return traverse(this, builder).toString();
-		} catch (TextException e) {
-			// TODO add log
-			return builder.toString();
-		}
-	}
-	
-	private StringBuilder traverse(TextComposite composite, StringBuilder builder) throws TextException {
-		for (AbstractComponent component: composite.components) {
+		for (AbstractComponent component: this) {
 			ComponentName componentName = component.getComponentName();
 			if (componentName == ComponentName.SYMBOL || componentName == ComponentName.DIGIT) {
 				builder.append(component.getContent());
-			} else {
-				traverse((TextComposite)component, builder);
 			}
 		}
-		return builder;
+		return builder.toString();
+	}
+
+	@Override
+	protected void addAllToList(List<AbstractComponent> abstractComponents) {
+		for (AbstractComponent component : this.components) {
+			ComponentName componentName = component.getComponentName();
+			if (componentName == ComponentName.SYMBOL || componentName == ComponentName.DIGIT) {
+				abstractComponents.add(component);
+			} else {
+				abstractComponents.add(component);
+				component.addAllToList(abstractComponents);
+			}
+        }
 	}
 
 }

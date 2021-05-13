@@ -25,6 +25,7 @@ import by.shyshaliaksey.task4.parser.WordParser;
 import by.shyshaliaksey.task4.parser.WordWithCharactersOutsideParser;
 import by.shyshaliaksey.task4.reader.TextReader;
 import by.shyshaliaksey.task4.reader.impl.TextReaderImpl;
+import by.shyshaliaksey.task4.service.impl.TextCalculationServiceImpl;
 
 public class TextCalculationServiceTest {
 
@@ -42,14 +43,14 @@ public class TextCalculationServiceTest {
 		ExpressionParser expressionParser = new ExpressionParser();
 		FullElementParser fullElementParser = new FullElementParser();
 		
-		textParser.setNextChain(paragraphParser);
-		paragraphParser.setNextChain(sentenceParser);
-		sentenceParser.setNextChain(elementParser);
-		elementParser.setNextChain(numberParser);
-		numberParser.setNextChain(wordParser);
-		wordParser.setNextChain(wordWitchCharactersOutsideParser);
-		wordWitchCharactersOutsideParser.setNextChain(expressionParser);
-		expressionParser.setNextChain(fullElementParser);
+		textParser.setNextInChain(paragraphParser);
+		paragraphParser.setNextInChain(sentenceParser);
+		sentenceParser.setNextInChain(elementParser);
+		elementParser.setNextInChain(numberParser);
+		numberParser.setNextInChain(wordParser);
+		wordParser.setNextInChain(wordWitchCharactersOutsideParser);
+		wordWitchCharactersOutsideParser.setNextInChain(expressionParser);
+		expressionParser.setNextInChain(fullElementParser);
 		
 		URI uri = getClass().getResource("/data/data.txt").toURI();
 		String absolutePath = new File(uri).getAbsolutePath();
@@ -67,7 +68,7 @@ public class TextCalculationServiceTest {
 		TextComposite paragraph1 = (TextComposite) rootComponent.getChild(1);
 		TextComposite paragraph2 = (TextComposite) rootComponent.getChild(2);
 		TextComposite paragraph3 = (TextComposite) rootComponent.getChild(3);
-		TextCalculationService calculationService = new TextCalculationService();
+		TextCalculationService calculationService = new TextCalculationServiceImpl();
 		boolean actual = calculationService.calculateSentencesInParagraph(paragraph0) == 2
 				&& calculationService.calculateSentencesInParagraph(paragraph1) == 2
 				&& calculationService.calculateSentencesInParagraph(paragraph2) == 1
@@ -78,7 +79,7 @@ public class TextCalculationServiceTest {
 	
 	@Test
 	public void calculateAllIdenticalWords() {
-		TextCalculationService calculationService = new TextCalculationService();
+		TextCalculationService calculationService = new TextCalculationServiceImpl();
 		int actual = calculationService.calculateAllIdenticalWords((TextComposite) rootComponent, "It");
 		int expected = 6;
 		Assert.assertEquals(actual, expected);
@@ -86,7 +87,7 @@ public class TextCalculationServiceTest {
 	
 	@Test
 	public void calculateVowels() throws TextException {
-		TextCalculationService calculationService = new TextCalculationService();
+		TextCalculationService calculationService = new TextCalculationServiceImpl();
 		int actual = calculationService.calculateVowelCount(rootComponent);
 		int expected = 227;
 		Assert.assertEquals(actual, expected);
@@ -94,9 +95,10 @@ public class TextCalculationServiceTest {
 	
 	@Test
 	public void calculateConsonants() throws TextException {
-		TextCalculationService calculationService = new TextCalculationService();
+		TextCalculationService calculationService = new TextCalculationServiceImpl();
 		int actual = calculationService.calculateConsonantCount(rootComponent);
 		int expected = 351;
 		Assert.assertEquals(actual, expected);
 	}
+	
 }

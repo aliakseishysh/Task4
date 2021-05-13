@@ -1,24 +1,2 @@
-Text ->
-    Paragraph ->
-        Sentence ->
-            Element ->
-                Symbol
-                Number ->
-                    Digit [0-9]
-                Expression ->
-                    Binary symbol
-                    Number
-                Word ->
-                    Letter
-
-
-
-
-Абзац ->
-    Предложение ->
-        Слово ->
-            Буква
-        Выражение ->
-            Цифра
-            Символ
-        Символ
+<h1>Задание №4 Composite + Chain + Interpreter</h1> </br>
+<h3>EPAM May 2021</h3>
