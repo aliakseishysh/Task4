@@ -10,7 +10,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class SentenceParser extends Chain {
 
-	private static final String ELEMENT = "\\t* *([\\w()<>|&^.\\\\,'~-]+)( |\\n|[.!?])+";
+	private static final String ELEMENT = "\\t* *([\\w()<>|&^.\\\\,'~-]+)( |\\n|[.…!?])+";
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {

@@ -9,13 +9,13 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class ElementParser extends Chain {
 
-	private static final String ELEMENT_WITH_WHITESPACES = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.]*)$";
+	private static final String ELEMENT = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.…]*)$";
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
 		ComponentName componentName = abstractComponent.getComponentName();
 		if (componentName == ComponentName.ELEMENT) {
-			Pattern pattern = Pattern.compile(ELEMENT_WITH_WHITESPACES);
+			Pattern pattern = Pattern.compile(ELEMENT);
 			Matcher matcher = pattern.matcher(content);
 			while (matcher.find()) {
 				this.parseSymbols(abstractComponent, matcher.group(1));
