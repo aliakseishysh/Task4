@@ -6,7 +6,9 @@ public class TerminalExpressionUnsignedRightShift implements Expression {
 
 	@Override
 	public void interpret(Context context) {
-		context.pushValue(context.popValue() >>> context.popValue());
+		Integer value1 = context.popValue();
+		Integer value2 = context.popValue();
+		context.pushValue(value2 >>> value1);
 	}
 
 	

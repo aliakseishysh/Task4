@@ -56,7 +56,9 @@ public class TextComposite extends AbstractComponent {
 		StringBuilder builder = new StringBuilder();
 		for (AbstractComponent component: this) {
 			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SYMBOL || componentName == ComponentName.DIGIT) {
+			if (componentName == ComponentName.SYMBOL 
+					|| componentName == ComponentName.DIGIT
+					|| componentName == ComponentName.PUNCTUATION_MARK) {
 				builder.append(component.getContent());
 			}
 		}
@@ -67,7 +69,9 @@ public class TextComposite extends AbstractComponent {
 	protected void addAllToList(List<AbstractComponent> abstractComponents) {
 		for (AbstractComponent component : this.components) {
 			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SYMBOL || componentName == ComponentName.DIGIT) {
+			if (componentName == ComponentName.SYMBOL 
+					|| componentName == ComponentName.DIGIT
+					|| componentName == ComponentName.PUNCTUATION_MARK) {
 				abstractComponents.add(component);
 			} else {
 				abstractComponents.add(component);

@@ -10,7 +10,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class WordWithCharactersOutsideParser extends Chain {
 
-	private static final String WORD_WITH_CHARACTERS_OUTSIDE = "^([-(),:'\\\"]+)?([A-Za-z]+)([-(),:'\\\".?!]+)?$";
+	private static final String WORD_WITH_CHARACTERS_OUTSIDE = "^([-(),:'\\\"]+)?([A-Za-z]+)([-(),:'\\\".…?!]+)?$";
 
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
