@@ -77,7 +77,7 @@ public class TextComposite extends AbstractComponent {
 				abstractComponents.add(component);
 				component.addAllToList(abstractComponents);
 			}
-        }
+		}
 	}
-
+	
 }

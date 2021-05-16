@@ -18,10 +18,10 @@ public abstract class AbstractComponent implements Iterable<AbstractComponent>, 
 	}
 	
 	public Iterator<AbstractComponent> iterator() {
-        List<AbstractComponent> list = new LinkedList<>();
-        addAllToList(list);
-        list.add(this);
-        return list.iterator();
+		List<AbstractComponent> list = new LinkedList<>();
+		addAllToList(list);
+		list.add(this);
+		return list.iterator();
     }
 	
 	public ComponentName getComponentName() { return this.componentName; }
