@@ -72,9 +72,4 @@ public class TextSearchServiceTest {
 		Assert.assertEquals(actual, expected);
 	}
 	
-	
-	
-	
-	
-	
 }

@@ -25,6 +25,10 @@ public class TextComposite extends AbstractComponent {
 		return components.size();
 	}
 	
+	public void setComponents(List<AbstractComponent> components) {
+		this.components = new ArrayList<>(components);
+	}
+	
 	@Override
 	public char getContent() {
 		logger.log(Level.ERROR, "UnsupportedOperationException");

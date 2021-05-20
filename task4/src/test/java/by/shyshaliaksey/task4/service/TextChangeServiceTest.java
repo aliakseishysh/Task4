@@ -73,4 +73,5 @@ public class TextChangeServiceTest {
 		int expected = 5;
 		Assert.assertEquals(actual, expected);
 	}
+	
 }
