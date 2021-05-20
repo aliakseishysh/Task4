@@ -1,7 +1,7 @@
 package by.shyshaliaksey.task4.parser;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.entity.TerminalElementLeaf;
 import by.shyshaliaksey.task4.exception.TextException;
 
@@ -22,15 +22,15 @@ public abstract class AbstractTextChain {
 	protected void parseSymbols(AbstractComponent component, String stringToParse) {
 		if (stringToParse != null) {
 			for (char symbol : stringToParse.toCharArray()) {
-				ComponentName componentName = ComponentName.SYMBOL;
+				ComponentType componentType = ComponentType.SYMBOL;
 				if (LETTERS.contains(Character.toString(symbol).toLowerCase())) {
-					componentName = ComponentName.LETTER;
+					componentType = ComponentType.LETTER;
 				} else if (DIGITS.contains(Character.toString(symbol))) {
-					componentName = ComponentName.DIGIT;
+					componentType = ComponentType.DIGIT;
 				} else if (PUNCTUATION_MARKS.contains(Character.toString(symbol))) {
-					componentName = ComponentName.PUNCTUATION_MARK;
+					componentType = ComponentType.PUNCTUATION_MARK;
 				}
-				component.add(new TerminalElementLeaf(componentName, component, symbol));
+				component.add(new TerminalElementLeaf(componentType, component, symbol));
 			}
 		}
 	}

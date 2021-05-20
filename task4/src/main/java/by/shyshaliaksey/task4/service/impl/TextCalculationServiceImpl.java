@@ -3,7 +3,7 @@ package by.shyshaliaksey.task4.service.impl;
 import java.util.List;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.service.TextCalculationService;
 import by.shyshaliaksey.task4.service.TextSearchService;
@@ -15,23 +15,23 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 
 	@Override
 	public int calculateSentencesInParagraph(AbstractComponent paragraph) throws TextException {
-		ComponentName componentName = paragraph.getComponentName();
-		if (componentName == ComponentName.PARAGRAPH) {
+		ComponentType componentType = paragraph.getComponentName();
+		if (componentType == ComponentType.PARAGRAPH) {
 			int sentenceCount = paragraph.getComponentsSize();
 			return sentenceCount;
 		} else {
-			throw new TextException("Composite type != PARAGRAPH: " + componentName);
+			throw new TextException("Composite type != PARAGRAPH: " + componentType);
 		}
 	}
 	
 	@Override
 	public int calculateWordLength(AbstractComponent word) throws TextException {
-		ComponentName componentName = word.getComponentName();
-		if (componentName == ComponentName.WORD) {
+		ComponentType componentType = word.getComponentName();
+		if (componentType == ComponentType.WORD) {
 			int wordLength = word.getComponentsSize();
 			return wordLength;
 		} else {
-			throw new TextException("Composite type != WORD: " + componentName);
+			throw new TextException("Composite type != WORD: " + componentType);
 		}
 	}
 	

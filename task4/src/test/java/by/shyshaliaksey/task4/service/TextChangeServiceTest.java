@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.parser.ElementParser;
@@ -59,7 +59,7 @@ public class TextChangeServiceTest {
 		List<String> content = reader.readAllLines(absolutePath);
 		String stringContent = content.stream().map(Object::toString).collect(Collectors.joining("\n"));
 		
-		rootComponent = new TextComposite(ComponentName.TEXT, null);
+		rootComponent = new TextComposite(ComponentType.TEXT, null);
 		textParser.parse(rootComponent, stringContent);
 	}
 

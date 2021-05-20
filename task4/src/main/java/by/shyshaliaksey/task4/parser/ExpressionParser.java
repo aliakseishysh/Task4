@@ -3,7 +3,7 @@ package by.shyshaliaksey.task4.parser;
 import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.interpreter.BinaryInterpreter;
@@ -17,15 +17,15 @@ public class ExpressionParser extends AbstractTextChain {
 
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
-		ComponentName componentName = parentComponent.getComponentName();
-		if (componentName == ComponentName.ELEMENT) {
+		ComponentType componentType = parentComponent.getComponentName();
+		if (componentType == ComponentType.ELEMENT) {
 			if (Pattern.matches(EXPRESSION, contentToParse)) {
 				NotationChanger notationChangerImpl = new NotationChangerImpl();
 				String postfixNotation = notationChangerImpl.normalToPrefix(contentToParse);
 				BinaryInterpreter interpreter = new BinaryInterpreterImpl(postfixNotation);
 				Number result = interpreter.calculate();
 				String resultString = result.toString();
-				TextComposite numberComposite = new TextComposite(ComponentName.NUMBER, parentComponent);
+				TextComposite numberComposite = new TextComposite(ComponentType.NUMBER, parentComponent);
 				this.parseSymbols(numberComposite, resultString);
 				parentComponent.add(numberComposite);
 			} else {

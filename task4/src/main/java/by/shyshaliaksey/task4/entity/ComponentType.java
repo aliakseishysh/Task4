@@ -1,6 +1,6 @@
 package by.shyshaliaksey.task4.entity;
 
-public enum ComponentName {
+public enum ComponentType {
 	TEXT,
 	PARAGRAPH,
 	SENTENCE,

@@ -11,8 +11,8 @@ public class TerminalElementLeaf extends AbstractComponent {
 	private static Logger logger = LogManager.getRootLogger(); 
 	private char content;
 	
-	public TerminalElementLeaf(ComponentName componentName, AbstractComponent parent, char content) {
-		super(componentName, parent);
+	public TerminalElementLeaf(ComponentType componentType, AbstractComponent parent, char content) {
+		super(componentType, parent);
 		this.content = content;
 	}
 	
@@ -45,7 +45,7 @@ public class TerminalElementLeaf extends AbstractComponent {
 	}
 	
 	@Override
-	protected void addAllToList(List<AbstractComponent> abstractComponents) {
+	public void addAllToList(List<AbstractComponent> abstractComponents) {
 		abstractComponents.add(this);
 	}
 }

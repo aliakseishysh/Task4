@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.service.TextCalculationService;
 import by.shyshaliaksey.task4.service.TextSearchService;
@@ -17,8 +17,8 @@ public class TextSearchServiceImpl implements TextSearchService {
 	public List<AbstractComponent> findAllSentences(AbstractComponent textComposite) {
 		List<AbstractComponent> sentences = new ArrayList<>();
 		for (AbstractComponent component: textComposite) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SENTENCE) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.SENTENCE) {
 				sentences.add(component);
 			}
 		}
@@ -32,11 +32,11 @@ public class TextSearchServiceImpl implements TextSearchService {
 		int maxWord = 0;
 		TextCalculationService calculationService = new TextCalculationServiceImpl();
 		for (AbstractComponent component: textComposite) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SENTENCE) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.SENTENCE) {
 				currentSentence++;
 			}
-			if (componentName == ComponentName.WORD) {
+			if (componentType == ComponentType.WORD) {
 				int currentLength = calculationService.calculateWordLength(component);
 				if (currentLength > maxWord) {
 					maxWord = currentLength;
@@ -54,8 +54,8 @@ public class TextSearchServiceImpl implements TextSearchService {
 	public List<AbstractComponent> findAllWords(AbstractComponent textComposite) {
 		List<AbstractComponent> words = new ArrayList<>();
 		for (AbstractComponent component: textComposite) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.WORD) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.WORD) {
 				words.add(component);
 			}
 		}
@@ -66,8 +66,8 @@ public class TextSearchServiceImpl implements TextSearchService {
 	public List<AbstractComponent> findAllLetters(AbstractComponent textComposite) {
 		List<AbstractComponent> letters = new ArrayList<>();
 		for (AbstractComponent component: textComposite) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.LETTER) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.LETTER) {
 				letters.add(component);
 			}
 		}
@@ -79,11 +79,11 @@ public class TextSearchServiceImpl implements TextSearchService {
 		Map<AbstractComponent, Integer> words = new HashMap<>();
 		int currentSentence = 0;
 		for (AbstractComponent component: textComposite) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.WORD) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.WORD) {
 				words.put(component, currentSentence);
 			}
-			if (componentName == ComponentName.SENTENCE) {
+			if (componentType == ComponentType.SENTENCE) {
 				currentSentence++;
 			}
 		}

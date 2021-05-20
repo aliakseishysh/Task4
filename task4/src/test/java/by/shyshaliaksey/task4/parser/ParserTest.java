@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.reader.TextReader;
@@ -43,7 +43,7 @@ public class ParserTest {
 		List<String> content = reader.readAllLines(absolutePath);
 		String expected = content.stream().map(Object::toString).collect(Collectors.joining("\n"));
 		
-		AbstractComponent rootComponent = new TextComposite(ComponentName.TEXT, null);
+		AbstractComponent rootComponent = new TextComposite(ComponentType.TEXT, null);
 		textParser.parse(rootComponent, expected);
 		String actual = rootComponent.toString();
 		Assert.assertEquals(actual, expected);

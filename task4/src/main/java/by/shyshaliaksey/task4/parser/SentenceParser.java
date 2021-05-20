@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
-import by.shyshaliaksey.task4.entity.ComponentName;
+import by.shyshaliaksey.task4.entity.ComponentType;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
@@ -14,12 +14,12 @@ public class SentenceParser extends AbstractTextChain {
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {
-		if (abstractComponent.getComponentName() == ComponentName.SENTENCE) {
+		if (abstractComponent.getComponentName() == ComponentType.SENTENCE) {
 			Pattern pattern = Pattern.compile(ELEMENT);
 			Matcher matcher = pattern.matcher(content);
 			while (matcher.find()) {
 				String element = content.substring(matcher.start(), matcher.end());
-				TextComposite elementComposite = new TextComposite(ComponentName.ELEMENT, abstractComponent);
+				TextComposite elementComposite = new TextComposite(ComponentType.ELEMENT, abstractComponent);
 				this.nextInChain.parse(elementComposite, element);
 				abstractComponent.add(elementComposite);
 			}

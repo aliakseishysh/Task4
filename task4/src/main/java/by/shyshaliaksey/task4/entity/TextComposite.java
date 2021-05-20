@@ -16,8 +16,8 @@ public class TextComposite extends AbstractComponent {
 		super();
 	}
 	
-	public TextComposite(ComponentName componentName, AbstractComponent parent) {
-		super(componentName, parent);
+	public TextComposite(ComponentType componentType, AbstractComponent parent) {
+		super(componentType, parent);
 		this.components = new ArrayList<>();
 	}
 	
@@ -59,11 +59,11 @@ public class TextComposite extends AbstractComponent {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		for (AbstractComponent component: this) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SYMBOL
-					|| componentName == ComponentName.LETTER
-					|| componentName == ComponentName.DIGIT
-					|| componentName == ComponentName.PUNCTUATION_MARK) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.SYMBOL
+					|| componentType == ComponentType.LETTER
+					|| componentType == ComponentType.DIGIT
+					|| componentType == ComponentType.PUNCTUATION_MARK) {
 				builder.append(component.getContent());
 			}
 		}
@@ -71,13 +71,13 @@ public class TextComposite extends AbstractComponent {
 	}
 
 	@Override
-	protected void addAllToList(List<AbstractComponent> abstractComponents) {
+	public void addAllToList(List<AbstractComponent> abstractComponents) {
 		for (AbstractComponent component : this.components) {
-			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SYMBOL
-					|| componentName == ComponentName.LETTER
-					|| componentName == ComponentName.DIGIT
-					|| componentName == ComponentName.PUNCTUATION_MARK) {
+			ComponentType componentType = component.getComponentName();
+			if (componentType == ComponentType.SYMBOL
+					|| componentType == ComponentType.LETTER
+					|| componentType == ComponentType.DIGIT
+					|| componentType == ComponentType.PUNCTUATION_MARK) {
 				abstractComponents.add(component);
 			} else {
 				abstractComponents.add(component);
