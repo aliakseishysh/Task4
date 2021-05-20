@@ -8,7 +8,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class WordWithCharactersOutsideParser extends Chain {
+public class WordWithCharactersOutsideParser extends AbstractTextChain {
 
 	private static final String WORD_WITH_CHARACTERS_OUTSIDE = "^([-(),:'\\\"]+)?([A-Za-z]+)([-(),:'\\\".…?!]+)?$";
 

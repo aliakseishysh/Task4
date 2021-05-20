@@ -8,7 +8,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class SentenceParser extends Chain {
+public class SentenceParser extends AbstractTextChain {
 
 	private static final String ELEMENT = "\\t* *([\\w()<>|&^.\\\\,'~-]+)( |\\n|[.…!?])+";
 

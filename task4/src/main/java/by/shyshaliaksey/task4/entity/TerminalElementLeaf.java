@@ -6,12 +6,12 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LeafElement extends AbstractComponent {
+public class TerminalElementLeaf extends AbstractComponent {
 
 	private static Logger logger = LogManager.getRootLogger(); 
 	private char content;
 	
-	public LeafElement(ComponentName componentName, AbstractComponent parent, char content) {
+	public TerminalElementLeaf(ComponentName componentName, AbstractComponent parent, char content) {
 		super(componentName, parent);
 		this.content = content;
 	}
@@ -39,13 +39,13 @@ public class LeafElement extends AbstractComponent {
 	}
 
 	@Override
-	protected void addAllToList(List<AbstractComponent> abstractComponents) {
-		abstractComponents.add(this);
-	}
-
-	@Override
 	public int getComponentsSize() {
 		logger.log(Level.ERROR, "UnsupportedOperationException");
 		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	protected void addAllToList(List<AbstractComponent> abstractComponents) {
+		abstractComponents.add(this);
 	}
 }

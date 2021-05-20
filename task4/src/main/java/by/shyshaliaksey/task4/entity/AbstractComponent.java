@@ -34,10 +34,10 @@ public abstract class AbstractComponent implements Iterable<AbstractComponent>, 
 	
 	public abstract void add(AbstractComponent abstractComponent);
 	
-	protected abstract void addAllToList(List<AbstractComponent> abstractComponents);
-	
 	public abstract void remove(AbstractComponent abstractComponent);
-
+	
 	public abstract AbstractComponent getChild(int index);
+
+	protected abstract void addAllToList(List<AbstractComponent> abstractComponents);
 	
 }

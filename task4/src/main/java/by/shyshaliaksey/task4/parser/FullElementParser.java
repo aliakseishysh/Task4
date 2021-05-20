@@ -5,7 +5,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class FullElementParser extends Chain {
+public class FullElementParser extends AbstractTextChain {
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {

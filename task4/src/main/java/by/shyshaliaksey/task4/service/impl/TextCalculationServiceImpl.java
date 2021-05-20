@@ -4,7 +4,6 @@ import java.util.List;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.LeafElement;
 import by.shyshaliaksey.task4.exception.TextException;
 import by.shyshaliaksey.task4.service.TextCalculationService;
 import by.shyshaliaksey.task4.service.TextSearchService;
@@ -54,11 +53,10 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 	@Override
 	public int calculateVowelCount(AbstractComponent component) {
 		TextSearchService searchService = new TextSearchServiceImpl();
-		List<AbstractComponent> symbols = searchService.findAllSymbols(component);
+		List<AbstractComponent> letters = searchService.findAllLetters(component);
 		int vowelCount = 0;
-		for (AbstractComponent symbolComponent: symbols) {
-			LeafElement leafElement = (LeafElement) symbolComponent;
-			String stringToSearch = Character.toString(leafElement.getContent()).toLowerCase();
+		for (AbstractComponent letterComponent: letters) {
+			String stringToSearch = Character.toString(letterComponent.getContent()).toLowerCase();
 			if (VOWELS.contains(stringToSearch)) {
 				vowelCount++;
 			}
@@ -69,11 +67,10 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 	@Override
 	public int calculateConsonantCount(AbstractComponent component) {
 		TextSearchService searchService = new TextSearchServiceImpl();
-		List<AbstractComponent> symbols = searchService.findAllSymbols(component);
+		List<AbstractComponent> letters = searchService.findAllLetters(component);
 		int consonantCount = 0;
-		for (AbstractComponent symbolComponent: symbols) {
-			LeafElement leafElement = (LeafElement) symbolComponent;
-			String stringToSearch = Character.toString(leafElement.getContent()).toLowerCase();
+		for (AbstractComponent letterComponent: letters) {
+			String stringToSearch = Character.toString(letterComponent.getContent()).toLowerCase();
 			if (CONSONANTS.contains(stringToSearch)) {
 				consonantCount++;
 			}

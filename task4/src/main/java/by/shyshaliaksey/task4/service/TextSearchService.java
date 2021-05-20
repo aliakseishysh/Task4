@@ -14,7 +14,7 @@ public interface TextSearchService {
 
 	List<AbstractComponent> findAllWords(AbstractComponent textComposite);
 
-	List<AbstractComponent> findAllSymbols(AbstractComponent textComposite);
+	List<AbstractComponent> findAllLetters(AbstractComponent textComposite);
 
 	Map<AbstractComponent, Integer> findAllWordsWithSentencesNumbers(AbstractComponent textComposite);
 

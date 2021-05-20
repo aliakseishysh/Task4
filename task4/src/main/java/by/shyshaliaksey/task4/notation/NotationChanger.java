@@ -1,7 +1,8 @@
 package by.shyshaliaksey.task4.notation;
 
+@FunctionalInterface
 public interface NotationChanger {
 
-	String normalToPrefix(String normalForm);
+	public String normalToPrefix(String normalForm);
 
 }

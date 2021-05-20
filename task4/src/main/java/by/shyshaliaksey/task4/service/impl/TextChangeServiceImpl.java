@@ -25,12 +25,13 @@ public class TextChangeServiceImpl implements TextChangeService {
 	}
 	
 	@Override
-	public void sortParagraphsBySentences(TextComposite textComposite) {
+	public List<AbstractComponent> sortParagraphsBySentences(TextComposite textComposite) {
 		List<AbstractComponent> paragraphs = new ArrayList<>();
 		for (int i = 0; i < textComposite.getComponentsSize(); i++) {
 			paragraphs.add(textComposite.getChild(i));
 		}
 		paragraphs.sort(new ParagraphBySentenceCountComparator());
+		return paragraphs;
 	}
 	
 }

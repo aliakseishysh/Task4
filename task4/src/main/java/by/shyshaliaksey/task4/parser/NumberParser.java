@@ -7,7 +7,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class NumberParser extends Chain {
+public class NumberParser extends AbstractTextChain {
 
 	private static final String NUMBER = "^[0-9]+$";
 

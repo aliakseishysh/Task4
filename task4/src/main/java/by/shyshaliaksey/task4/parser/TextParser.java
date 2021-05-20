@@ -8,7 +8,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class TextParser extends Chain {
+public class TextParser extends AbstractTextChain {
 
 	private static final String PARAGRAPHS = "\\t[^\\t]*";
 

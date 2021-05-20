@@ -7,7 +7,7 @@ import by.shyshaliaksey.task4.entity.ComponentName;
 import by.shyshaliaksey.task4.entity.TextComposite;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public class WordParser extends Chain {
+public class WordParser extends AbstractTextChain {
 
 	private static final String WORD = "^[A-Za-z]+$";
 

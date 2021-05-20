@@ -11,7 +11,7 @@ import by.shyshaliaksey.task4.interpreter.impl.BinaryInterpreterImpl;
 import by.shyshaliaksey.task4.notation.NotationChanger;
 import by.shyshaliaksey.task4.notation.impl.NotationChangerImpl;
 
-public class ExpressionParser extends Chain {
+public class ExpressionParser extends AbstractTextChain {
 
 	private static final String EXPRESSION = "^([~0-9|&()<>^]+)$";
 

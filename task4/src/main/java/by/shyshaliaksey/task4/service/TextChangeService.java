@@ -1,11 +1,14 @@
 package by.shyshaliaksey.task4.service;
 
+import java.util.List;
+
+import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.TextComposite;
 
 public interface TextChangeService {
 
-	void deleteAllSentencesWithWordCountLessThen(TextComposite textComposite, int wordCount);
+	public void deleteAllSentencesWithWordCountLessThen(TextComposite textComposite, int wordCount);
 
-	void sortParagraphsBySentences(TextComposite textComposite);
+	public List<AbstractComponent> sortParagraphsBySentences(TextComposite textComposite);
 
 }

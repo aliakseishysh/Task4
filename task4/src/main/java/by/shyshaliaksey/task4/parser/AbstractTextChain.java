@@ -2,17 +2,18 @@ package by.shyshaliaksey.task4.parser;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentName;
-import by.shyshaliaksey.task4.entity.LeafElement;
+import by.shyshaliaksey.task4.entity.TerminalElementLeaf;
 import by.shyshaliaksey.task4.exception.TextException;
 
-public abstract class Chain {
+public abstract class AbstractTextChain {
 
 	private static final String DIGITS = "0123456789";
 	private static final String PUNCTUATION_MARKS = ".,-!?…"; 
+	private static final String LETTERS = "abcdefghijklmnopqrstuvwxyz";
 	
-	protected Chain nextInChain;
+	protected AbstractTextChain nextInChain;
 	
-	public void setNextInChain(Chain nextInChain) {
+	public void setNextInChain(AbstractTextChain nextInChain) {
 		this.nextInChain = nextInChain;
 	}
 
@@ -22,12 +23,14 @@ public abstract class Chain {
 		if (stringToParse != null) {
 			for (char symbol : stringToParse.toCharArray()) {
 				ComponentName componentName = ComponentName.SYMBOL;
-				if (DIGITS.contains(Character.toString(symbol))) {
+				if (LETTERS.contains(Character.toString(symbol).toLowerCase())) {
+					componentName = ComponentName.LETTER;
+				} else if (DIGITS.contains(Character.toString(symbol))) {
 					componentName = ComponentName.DIGIT;
 				} else if (PUNCTUATION_MARKS.contains(Character.toString(symbol))) {
 					componentName = ComponentName.PUNCTUATION_MARK;
 				}
-				component.add(new LeafElement(componentName, component, symbol));
+				component.add(new TerminalElementLeaf(componentName, component, symbol));
 			}
 		}
 	}

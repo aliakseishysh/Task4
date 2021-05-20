@@ -63,15 +63,15 @@ public class TextSearchServiceImpl implements TextSearchService {
 	}
 	
 	@Override
-	public List<AbstractComponent> findAllSymbols(AbstractComponent textComposite) {
-		List<AbstractComponent> symbols = new ArrayList<>();
+	public List<AbstractComponent> findAllLetters(AbstractComponent textComposite) {
+		List<AbstractComponent> letters = new ArrayList<>();
 		for (AbstractComponent component: textComposite) {
 			ComponentName componentName = component.getComponentName();
-			if (componentName == ComponentName.SYMBOL) {
-				symbols.add(component);
+			if (componentName == ComponentName.LETTER) {
+				letters.add(component);
 			}
 		}
-		return symbols;
+		return letters;
 	}
 	
 	@Override
