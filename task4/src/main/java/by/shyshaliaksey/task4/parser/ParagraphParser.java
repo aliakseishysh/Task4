@@ -10,7 +10,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class ParagraphParser extends AbstractTextChain {
 
-	private static final String SENTENCE = "\\s+[A-Za-z\\s-(),0-9<>~&|^']+\\.\\n?";
+	private static final String SENTENCE = "\\s+[\\p{Alpha}\\s-(),\\d<>~&|^']+[\\.…!?]\\n?";
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {

@@ -9,7 +9,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class NumberParser extends AbstractTextChain {
 
-	private static final String NUMBER = "^[0-9]+$";
+	private static final String NUMBER = "^[\\d]+$";
 
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {

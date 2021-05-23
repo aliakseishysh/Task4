@@ -10,7 +10,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class TextParser extends AbstractTextChain {
 
-	private static final String PARAGRAPHS = "\\t[^\\t]*";
+	private static final String PARAGRAPHS = "\\t+[^\\t]*";
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {

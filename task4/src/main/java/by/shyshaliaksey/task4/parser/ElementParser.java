@@ -9,7 +9,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class ElementParser extends AbstractTextChain {
 
-	private static final String ELEMENT = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.…]*)$";
+	private static final String ELEMENT = "^(\\t+| +|\\n+)*([\\w()<>|&^\\\\,'~-]+)([\\t\\n \\.…!?]*)$";
 
 	@Override
 	public void parse(AbstractComponent abstractComponent, String content) throws TextException {

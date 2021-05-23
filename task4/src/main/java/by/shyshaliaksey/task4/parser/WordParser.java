@@ -9,7 +9,7 @@ import by.shyshaliaksey.task4.exception.TextException;
 
 public class WordParser extends AbstractTextChain {
 
-	private static final String WORD = "^[A-Za-z]+$";
+	private static final String WORD = "^[\\p{Alpha}-]+$";
 
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {

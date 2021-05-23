@@ -13,7 +13,7 @@ import by.shyshaliaksey.task4.notation.impl.NotationChangerImpl;
 
 public class ExpressionParser extends AbstractTextChain {
 
-	private static final String EXPRESSION = "^([~0-9|&()<>^]+)$";
+	private static final String EXPRESSION = "^([~\\d|&()<>^]+)$";
 
 	@Override
 	public void parse(AbstractComponent parentComponent, String contentToParse) throws TextException {
