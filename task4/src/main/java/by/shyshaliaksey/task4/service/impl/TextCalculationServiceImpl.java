@@ -11,8 +11,8 @@ import by.shyshaliaksey.task4.service.TextSearchService;
 
 public class TextCalculationServiceImpl implements TextCalculationService {
 	
-	private static final String VOWELS = "[aeiouAEIOU]";
-	private static final String CONSONANTS = "[a-zA-Z&&[^aeiouAEIOU]]";
+	private static final String VOWEL = "[aeiouAEIOU]";
+	private static final String CONSONANT = "[a-zA-Z&&[^aeiouAEIOU]]";
 
 	@Override
 	public int calculateSentencesInParagraph(AbstractComponent paragraph) throws TextException {
@@ -58,7 +58,7 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 		int vowelCount = 0;
 		for (AbstractComponent letterComponent: letters) {
 			String stringToSearch = Character.toString(letterComponent.getContent());
-			if (Pattern.matches(VOWELS, stringToSearch)) {
+			if (Pattern.matches(VOWEL, stringToSearch)) {
 				vowelCount++;
 			}
 		}
@@ -72,7 +72,7 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 		int consonantCount = 0;
 		for (AbstractComponent letterComponent: letters) {
 			String stringToSearch = Character.toString(letterComponent.getContent());
-			if (Pattern.matches(CONSONANTS, stringToSearch)) {
+			if (Pattern.matches(CONSONANT, stringToSearch)) {
 				consonantCount++;
 			}
 		}
