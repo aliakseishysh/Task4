@@ -1,6 +1,7 @@
 package by.shyshaliaksey.task4.service.impl;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.entity.AbstractComponent;
 import by.shyshaliaksey.task4.entity.ComponentType;
@@ -10,8 +11,8 @@ import by.shyshaliaksey.task4.service.TextSearchService;
 
 public class TextCalculationServiceImpl implements TextCalculationService {
 	
-	private static final String VOWELS = "aeiou";
-	private static final String CONSONANTS = "bcdfghjklmnpqrstvwxyz";
+	private static final String VOWELS = "[aeiouAEIOU]";
+	private static final String CONSONANTS = "[a-zA-Z&&[^aeiouAEIOU]]";
 
 	@Override
 	public int calculateSentencesInParagraph(AbstractComponent paragraph) throws TextException {
@@ -56,8 +57,8 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 		List<AbstractComponent> letters = searchService.findAllLetters(component);
 		int vowelCount = 0;
 		for (AbstractComponent letterComponent: letters) {
-			String stringToSearch = Character.toString(letterComponent.getContent()).toLowerCase();
-			if (VOWELS.contains(stringToSearch)) {
+			String stringToSearch = Character.toString(letterComponent.getContent());
+			if (Pattern.matches(VOWELS, stringToSearch)) {
 				vowelCount++;
 			}
 		}
@@ -70,8 +71,8 @@ public class TextCalculationServiceImpl implements TextCalculationService {
 		List<AbstractComponent> letters = searchService.findAllLetters(component);
 		int consonantCount = 0;
 		for (AbstractComponent letterComponent: letters) {
-			String stringToSearch = Character.toString(letterComponent.getContent()).toLowerCase();
-			if (CONSONANTS.contains(stringToSearch)) {
+			String stringToSearch = Character.toString(letterComponent.getContent());
+			if (Pattern.matches(CONSONANTS, stringToSearch)) {
 				consonantCount++;
 			}
 		}

@@ -2,6 +2,7 @@ package by.shyshaliaksey.task4.notation.impl;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.regex.Pattern;
 
 import by.shyshaliaksey.task4.notation.NotationChanger;
 
@@ -9,7 +10,7 @@ public class NotationChangerImpl implements NotationChanger {
 
 	private static final String EMPTY_STRING = "";
 	private static final String SPACE = " ";
-	private static final String DIGITS = "0123456789";
+	private static final String DIGITS = "\\d";
 	private static final String UNARY_NOT = "~";
 	private static final String OPEN_BRACKET = "(";
 	private static final String CLOSE_BRACKET = ")";
@@ -91,7 +92,7 @@ public class NotationChangerImpl implements NotationChanger {
 	}
 	
 	private boolean isSymbolDigit(String symbol) {
-		return DIGITS.contains(symbol);
+		return Pattern.matches(DIGITS, symbol);
 	}
 	
 	private int getPriority(String symbol) {
